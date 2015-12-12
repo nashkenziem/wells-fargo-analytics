@@ -38,19 +38,20 @@
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
         </div>
 
-        <h3>
-<a id="wells-fargo-analytics-competition" class="anchor" href="#wells-fargo-analytics-competition" aria-hidden="true"><span class="octicon octicon-link"></span></a>Wells Fargo Analytics Competition</h3>
+        <h1>
+<a id="wells-fargo-analytics-competition" class="anchor" href="#wells-fargo-analytics-competition" aria-hidden="true"><span class="octicon octicon-link"></span></a>Wells Fargo Analytics Competition</h1>
 
 <p>Wells Fargo asked college students from 13 different colleges and universities, selected by the bank, to analyze financial and bank related discussion through two different social media platforms. Wells Fargo provided a data set including tweets from Twitter and comments and posts from Facebook. My colleagues and I cleaned the data and created visuals based on term frequency and sentiment analysis of the data. We then used these visuals to represent attitudes towards the separate banks given by the consumers.</p>
 
-<h2>
-<a id="process" class="anchor" href="#process" aria-hidden="true"><span class="octicon octicon-link"></span></a>Process</h2>
+<h1>
+<a id="process" class="anchor" href="#process" aria-hidden="true"><span class="octicon octicon-link"></span></a>Process</h1>
 
-<ul>
-<li>All code done in R *
-### Creating a data frame
-We created a data frame </li>
-</ul>
+<p><strong>All code in R</strong></p>
+
+<h3>
+<a id="creating-a-data-frame" class="anchor" href="#creating-a-data-frame" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating a data frame</h3>
+
+<p>We created a data frame to create easily accessible data tables. These data tables make it easy to select an entire column or row of data.</p>
 
 <div class="highlight highlight-source-r"><pre><span class="pl-v">df</span> <span class="pl-k">=</span> read.table(<span class="pl-s"><span class="pl-pds">'</span>dataset.txt<span class="pl-pds">'</span></span>,<span class="pl-v">sep</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>|<span class="pl-pds">"</span></span>,<span class="pl-v">header</span><span class="pl-k">=</span><span class="pl-c1">T</span>)
 spellDoc(<span class="pl-smi">doc</span>, <span class="pl-v">wordHandler</span> <span class="pl-k">=</span> DocSpeller(), <span class="pl-v">checker</span> <span class="pl-k">=</span> docChecker(<span class="pl-smi">speller</span>), <span class="pl-v">speller</span> <span class="pl-k">=</span> getSpeller(<span class="pl-smi">conf</span>), <span class="pl-v">conf</span> <span class="pl-k">=</span> createSpellConfig())</pre></div>
@@ -58,7 +59,7 @@ spellDoc(<span class="pl-smi">doc</span>, <span class="pl-v">wordHandler</span> 
 <h3>
 <a id="remove-non-ascii-characters" class="anchor" href="#remove-non-ascii-characters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Remove Non-ASCII Characters</h3>
 
-<p>ASCII characters are</p>
+<p>ASCII characters are alphanumeric characters that have a numeric value that the computer. We removed all non-ASCII characters because the computer cannot process them.</p>
 
 <div class="highlight highlight-source-r"><pre><span class="pl-v">df.texts.clean</span> <span class="pl-k">=</span> as.data.frame(iconv(<span class="pl-smi">df.texts</span><span class="pl-k">$</span><span class="pl-smi">FullText</span>, <span class="pl-s"><span class="pl-pds">"</span>latin1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>ASCII<span class="pl-pds">"</span></span>, <span class="pl-v">sub</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>))
 <span class="pl-k">for</span>(<span class="pl-smi">i</span> <span class="pl-k">in</span> <span class="pl-c1">1</span><span class="pl-k">:</span>nrow(<span class="pl-smi">df</span>))
@@ -71,7 +72,7 @@ colnames(<span class="pl-smi">df.texts.clean</span>) <span class="pl-k">=</span>
 <h3>
 <a id="load-using-tm-library" class="anchor" href="#load-using-tm-library" aria-hidden="true"><span class="octicon octicon-link"></span></a>Load using TM library</h3>
 
-<p>The TM library is </p>
+<p>The TM library is a text mining package downloaded from CRAN. This package contains various functions used to analyze text data.</p>
 
 <div class="highlight highlight-source-r"><pre>library(<span class="pl-smi">tm</span>) 
 <span class="pl-smi">docs</span> <span class="pl-k">&lt;-</span> Corpus(DataframeSource(<span class="pl-smi">df.texts.clean</span>))</pre></div>
@@ -79,7 +80,7 @@ colnames(<span class="pl-smi">df.texts.clean</span>) <span class="pl-k">=</span>
 <h3>
 <a id="creating-a-corpus" class="anchor" href="#creating-a-corpus" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating a Corpus</h3>
 
-<p>We created a corpus </p>
+<p>A corpus is simply a body of text. We consolidated all of the text from the data set into one corpus.</p>
 
 <div class="highlight highlight-source-r"><pre><span class="pl-v">df.texts</span> <span class="pl-k">=</span> as.data.frame(<span class="pl-smi">df</span>[,ncol(<span class="pl-smi">df</span>)])
 colnames(<span class="pl-smi">df.texts</span>) <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>FullText<span class="pl-pds">'</span></span></pre></div>
@@ -87,7 +88,7 @@ colnames(<span class="pl-smi">df.texts</span>) <span class="pl-k">=</span> <span
 <h3>
 <a id="cleaning-the-text" class="anchor" href="#cleaning-the-text" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cleaning the text</h3>
 
-<p>We then cleaned the text by removing...</p>
+<p>We then cleaned the text by removing white spaces, and stop words. Stop words are words like "the," and "but" that have no value analytically. We also removed words that Wells Fargo added to protect the anonymity of consumers such as "Name."</p>
 
 <div class="highlight highlight-source-r"><pre><span class="pl-en">removeNumPunct</span> <span class="pl-k">&lt;-</span> <span class="pl-k">function</span>(<span class="pl-smi">x</span>) gsub(<span class="pl-s"><span class="pl-pds">"</span>[^[:alpha:][:space:]]*<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>, <span class="pl-smi">x</span>)
 <span class="pl-smi">docs</span> <span class="pl-k">&lt;-</span> tm_map(<span class="pl-smi">docs</span>, content_transformer(<span class="pl-smi">removeNumPunct</span>))
@@ -101,9 +102,9 @@ colnames(<span class="pl-smi">df.texts</span>) <span class="pl-k">=</span> <span
 <span class="pl-smi">docs</span> <span class="pl-k">&lt;-</span> Corpus(VectorSource(<span class="pl-smi">docs</span>))</pre></div>
 
 <h3>
-<a id="creating-corporatdm" class="anchor" href="#creating-corporatdm" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating corpora/tdm</h3>
+<a id="creating-corpora-and-term-document-matricies" class="anchor" href="#creating-corpora-and-term-document-matricies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating corpora and term document matricies</h3>
 
-<p>We created individual corpora for each bank then individual term document matrices for each bank as well (repeat for all four banks)
+<p>We created individual corpora for each bank then individual term document matrices for each bank as well.
 Corpus for Bank A:</p>
 
 <div class="highlight highlight-source-r"><pre><span class="pl-v">bankA.idx</span> <span class="pl-k">=</span> which(sapply(<span class="pl-smi">df</span><span class="pl-k">$</span><span class="pl-smi">FullText</span>,<span class="pl-k">function</span>(<span class="pl-smi">x</span>) grepl(<span class="pl-s"><span class="pl-pds">"</span>BankA<span class="pl-pds">"</span></span>,<span class="pl-smi">x</span>)))
@@ -117,7 +118,7 @@ Corpus for Bank A:</p>
 <h3>
 <a id="spell-check" class="anchor" href="#spell-check" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spell Check</h3>
 
-<p>We manually took misspelled words out- looked through each individual data set for misspelled words- used frequent terms as a guide (repeat for all banks + entire data set)</p>
+<p>To check the spelling we used the list of frequent terms for each bank, and the entire data set, and picked out misspelled words and replaced them manually. </p>
 
 <div class="highlight highlight-source-r"><pre><span class="pl-v">terms</span> <span class="pl-k">=</span> dimnames(<span class="pl-smi">tdm</span>)<span class="pl-k">$</span><span class="pl-smi">Terms</span>
 <span class="pl-k">for</span> (<span class="pl-smi">i</span> <span class="pl-k">in</span> <span class="pl-c1">1</span><span class="pl-k">:</span>length(<span class="pl-smi">terms</span>)) {
@@ -170,7 +171,7 @@ dimnames(<span class="pl-smi">tdm</span>)<span class="pl-k">$</span><span class=
 <h3>
 <a id="visuals-based-on-term-frequency" class="anchor" href="#visuals-based-on-term-frequency" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visuals based on term frequency</h3>
 
-<p>creates term frequency graph and a word cloud repeat for all banks 
+<p>Using the most frequent terms for the data set we created both a term frequency graph and a word cloud. We also did this for each bank.
 Term frequency:</p>
 
 <div class="highlight highlight-source-r"><pre>library(<span class="pl-smi">slam</span>)
@@ -185,6 +186,8 @@ Term frequency:</p>
 library(<span class="pl-smi">ggplot2</span>)
 ggplot(<span class="pl-smi">df.all</span>, aes(<span class="pl-v">x</span><span class="pl-k">=</span><span class="pl-smi">term</span>, <span class="pl-v">y</span><span class="pl-k">=</span><span class="pl-smi">freq</span>)) <span class="pl-k">+</span> geom_bar(<span class="pl-v">stat</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>identity<span class="pl-pds">"</span></span>) <span class="pl-k">+</span> xlab(<span class="pl-s"><span class="pl-pds">"</span>Terms<span class="pl-pds">"</span></span>) <span class="pl-k">+</span> ylab(<span class="pl-s"><span class="pl-pds">"</span>Count<span class="pl-pds">"</span></span>) <span class="pl-k">+</span> coord_flip()</pre></div>
 
+<p><a href="http://imgur.com/9ChJmcD"><img src="http://i.imgur.com/9ChJmcD.png" title="source: imgur.com"></a></p>
+
 <p>Word Cloud:</p>
 
 <div class="highlight highlight-source-r"><pre><span class="pl-smi">m</span> <span class="pl-k">&lt;-</span> as.matrix(<span class="pl-smi">tdm</span>)
@@ -193,6 +196,8 @@ ggplot(<span class="pl-smi">df.all</span>, aes(<span class="pl-v">x</span><span 
 <span class="pl-smi">pal</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">pal</span>[<span class="pl-k">-</span>(<span class="pl-c1">1</span><span class="pl-k">:</span><span class="pl-c1">4</span>)]
 library(<span class="pl-smi">wordcloud</span>)
 wordcloud(<span class="pl-v">words</span> <span class="pl-k">=</span> names(<span class="pl-smi">word.freq</span>), <span class="pl-v">freq</span> <span class="pl-k">=</span> <span class="pl-smi">word.freq</span>, <span class="pl-v">min.freq</span><span class="pl-k">=</span><span class="pl-c1">2500</span>, <span class="pl-v">random.order</span><span class="pl-k">=</span><span class="pl-c1">F</span>, <span class="pl-v">random.color</span><span class="pl-k">=</span><span class="pl-c1">F</span>, <span class="pl-v">colors</span> <span class="pl-k">=</span> <span class="pl-smi">pal</span>)</pre></div>
+
+<p><a href="http://imgur.com/ULops3z"><img src="http://i.imgur.com/ULops3z.png" title="source: imgur.com"></a> </p>
 
 <h3>
 <a id="sentiment-analysis" class="anchor" href="#sentiment-analysis" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sentiment analysis</h3>
@@ -236,7 +241,8 @@ wordcloud(<span class="pl-v">words</span> <span class="pl-k">=</span> names(<spa
 <h3>
 <a id="visuals-based-on-sentiment-analysis" class="anchor" href="#visuals-based-on-sentiment-analysis" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visuals based on sentiment analysis</h3>
 
-<p>bar v box</p>
+<p>We chose to use a bar plot and a box plot to represent sentiment scores for our data set. The box plot plots a point for the sentiment of each tweet or post separated by platform. The bar plot give the average score for each tweet or post. This is also separated by each platform. 
+Boxplot:</p>
 
 <div class="highlight highlight-source-r"><pre><span class="pl-c"># global score</span>
 <span class="pl-v">global_score</span> <span class="pl-k">=</span> round( <span class="pl-c1">100</span> <span class="pl-k">*</span> <span class="pl-smi">numpos</span> <span class="pl-k">/</span> (<span class="pl-smi">numpos</span> <span class="pl-k">+</span> <span class="pl-smi">numneg</span>) )
@@ -253,7 +259,9 @@ ggplot(<span class="pl-smi">scores</span>, aes(<span class="pl-v">x</span><span 
   labs(<span class="pl-v">title</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>Media Type's Sentiment Scores<span class="pl-pds">"</span></span>) <span class="pl-k">+</span> 
   xlab(<span class="pl-s"><span class="pl-pds">'</span>Media Type<span class="pl-pds">'</span></span>) <span class="pl-k">+</span> ylab(<span class="pl-s"><span class="pl-pds">'</span>Sentiment Score<span class="pl-pds">'</span></span>)</pre></div>
 
-<p>barplot</p>
+<p><a href="http://imgur.com/T5fq2Uz"><img src="http://i.imgur.com/T5fq2Uz.png" title="source: imgur.com"></a></p>
+
+<p>Barplot:</p>
 
 <div class="highlight highlight-source-r"><pre><span class="pl-v">meanscore</span> <span class="pl-k">=</span> tapply(<span class="pl-smi">scores</span><span class="pl-k">$</span><span class="pl-smi">score</span>, <span class="pl-smi">scores</span><span class="pl-k">$</span><span class="pl-smi">mediatype</span>, <span class="pl-smi">mean</span>)
 <span class="pl-v">df.plot</span> <span class="pl-k">=</span> <span class="pl-k">data.frame</span>(<span class="pl-v">mediatype</span><span class="pl-k">=</span>names(<span class="pl-smi">meanscore</span>), <span class="pl-v">meanscore</span><span class="pl-k">=</span><span class="pl-smi">meanscore</span>)
@@ -264,31 +272,41 @@ ggplot(<span class="pl-smi">df.plot</span>, aes(<span class="pl-v">x</span> <spa
   labs(<span class="pl-v">title</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>Average Sentiment Score<span class="pl-pds">"</span></span>) <span class="pl-k">+</span> 
   xlab(<span class="pl-s"><span class="pl-pds">'</span>Media Type<span class="pl-pds">'</span></span>) <span class="pl-k">+</span> ylab(<span class="pl-s"><span class="pl-pds">'</span>Average Score<span class="pl-pds">'</span></span>)</pre></div>
 
-<h2>
-<a id="visuals-for-individual-banks" class="anchor" href="#visuals-for-individual-banks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visuals for individual banks</h2>
+<p><a href="http://imgur.com/Rx1WNRJ"><img src="http://i.imgur.com/Rx1WNRJ.png" title="source: imgur.com"></a> </p>
+
+<h1>
+<a id="visuals-for-individual-banks" class="anchor" href="#visuals-for-individual-banks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visuals for individual banks</h1>
 
 <h3>
 <a id="bank-a" class="anchor" href="#bank-a" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bank A</h3>
 
+<p><a href="http://imgur.com/LFIROcV"><img src="http://i.imgur.com/LFIROcV.png" title="source: imgur.com"></a></p>
+
 <h3>
 <a id="bank-b" class="anchor" href="#bank-b" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bank B</h3>
+
+<p><a href="http://imgur.com/8M0kDpl"><img src="http://i.imgur.com/8M0kDpl.png" title="source: imgur.com"></a></p>
 
 <h3>
 <a id="bank-c" class="anchor" href="#bank-c" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bank C</h3>
 
+<p><a href="http://imgur.com/1HXa5Fg"><img src="http://i.imgur.com/1HXa5Fg.png" title="source: imgur.com"></a></p>
+
 <h3>
 <a id="bank-d" class="anchor" href="#bank-d" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bank D</h3>
 
-<h2>
-<a id="conclusions" class="anchor" href="#conclusions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusions</h2>
+<p><a href="http://imgur.com/wp8v2m4"><img src="http://i.imgur.com/wp8v2m4.png" title="source: imgur.com"></a></p>
 
-<h2>
-<a id="special-thanks" class="anchor" href="#special-thanks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Special Thanks</h2>
+<h1>
+<a id="conclusions" class="anchor" href="#conclusions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusions</h1>
+
+<h1>
+<a id="special-thanks" class="anchor" href="#special-thanks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Special Thanks</h1>
 
 <p>I'd like to thank Wells Fargo for presenting this opportunity. Specifically, I'd like to thank Wells Fargo's Office of Innovation, Enterprise of Social Media, and Chief Data Office - Enterprise Data &amp; Analytics teams for sponsoring this competition. I would also like to thank my colleagues, Katie Duchinski and Emily Berich, for their dedication and hard work on this project.</p>
 
-<h2>
-<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h2>
+<h1>
+<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h1>
 
 <p><a href="https://github.com/kduchinski" class="user-mention">@kduchinski</a>
 <a href="https://github.com/emilyberich" class="user-mention">@emilyberich</a></p>
