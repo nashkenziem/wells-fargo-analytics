@@ -1,71 +1,301 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!doctype html>
+<html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Wells Fargo Analytics Competition by nashkenziem</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
   <body>
-    <section class="page-header">
-      <h1 class="project-name">Wells Fargo Analytics Competition</h1>
-      <h2 class="project-tagline"></h2>
-      <a href="https://github.com/nashkenziem/wells-fargo-analytics" class="btn">View on GitHub</a>
-      <a href="https://github.com/nashkenziem/wells-fargo-analytics/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/nashkenziem/wells-fargo-analytics/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/nashkenziem/wells-fargo-analytics">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/nashkenziem/wells-fargo-analytics/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/nashkenziem/wells-fargo-analytics/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
-    <section class="main-content">
-      <h3>
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Wells Fargo Analytics Competition</h1>
+          <p></p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/nashkenziem">nashkenziem</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h3>
 <a id="wells-fargo-analytics-competition" class="anchor" href="#wells-fargo-analytics-competition" aria-hidden="true"><span class="octicon octicon-link"></span></a>Wells Fargo Analytics Competition</h3>
 
-<p>Using social media as a platform-Facebook and Twitter-we analyzed </p>
+<p>Wells Fargo asked college students from 13 different colleges and universities, selected by the bank, to analyze financial and bank related discussion through two different social media platforms. Wells Fargo provided a data set including tweets from Twitter and comments and posts from Facebook. My colleagues and I cleaned the data and created visuals based on term frequency and sentiment analysis of the data. We then used these visuals to represent attitudes towards the separate banks given by the consumers.</p>
+
+<h2>
+<a id="process" class="anchor" href="#process" aria-hidden="true"><span class="octicon octicon-link"></span></a>Process</h2>
+
+<ul>
+<li>All code done in R *
+### Creating a data frame
+We created a data frame </li>
+</ul>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-v">df</span> <span class="pl-k">=</span> read.table(<span class="pl-s"><span class="pl-pds">'</span>dataset.txt<span class="pl-pds">'</span></span>,<span class="pl-v">sep</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>|<span class="pl-pds">"</span></span>,<span class="pl-v">header</span><span class="pl-k">=</span><span class="pl-c1">T</span>)
+spellDoc(<span class="pl-smi">doc</span>, <span class="pl-v">wordHandler</span> <span class="pl-k">=</span> DocSpeller(), <span class="pl-v">checker</span> <span class="pl-k">=</span> docChecker(<span class="pl-smi">speller</span>), <span class="pl-v">speller</span> <span class="pl-k">=</span> getSpeller(<span class="pl-smi">conf</span>), <span class="pl-v">conf</span> <span class="pl-k">=</span> createSpellConfig())</pre></div>
 
 <h3>
-<a id="sentiment-analysis" class="anchor" href="#sentiment-analysis" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sentiment Analysis</h3>
+<a id="remove-non-ascii-characters" class="anchor" href="#remove-non-ascii-characters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Remove Non-ASCII Characters</h3>
 
-<p>The sentiment analysis measures the positive and negative connotations of the word in the tweets/comments 
-Bank A
-Bank B 
-Bank C
-Bank D</p>
+<p>ASCII characters are</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-v">df.texts.clean</span> <span class="pl-k">=</span> as.data.frame(iconv(<span class="pl-smi">df.texts</span><span class="pl-k">$</span><span class="pl-smi">FullText</span>, <span class="pl-s"><span class="pl-pds">"</span>latin1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>ASCII<span class="pl-pds">"</span></span>, <span class="pl-v">sub</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>))
+<span class="pl-k">for</span>(<span class="pl-smi">i</span> <span class="pl-k">in</span> <span class="pl-c1">1</span><span class="pl-k">:</span>nrow(<span class="pl-smi">df</span>))
+{
+  <span class="pl-smi">df.texts.clean</span>[<span class="pl-smi">i</span>,] <span class="pl-k">=</span> check_spelling(<span class="pl-smi">df.texts.clean</span>[<span class="pl-smi">i</span>,], <span class="pl-v">range</span> <span class="pl-k">=</span> <span class="pl-c1">2</span>, <span class="pl-v">assume.first.correct</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>, 
+                                      <span class="pl-v">dictionary</span><span class="pl-k">=</span><span class="pl-e">qdapDictionaries</span><span class="pl-k">::</span><span class="pl-smi">GradyAugmented</span>,<span class="pl-v">parallel</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>,<span class="pl-v">cores</span><span class="pl-k">=</span><span class="pl-e">parallel</span><span class="pl-k">::</span>detectCores()<span class="pl-k">/</span><span class="pl-c1">2</span>,<span class="pl-v">n.suggests</span><span class="pl-k">=</span><span class="pl-c1">8</span>)
+}
+colnames(<span class="pl-smi">df.texts.clean</span>) <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>FullText<span class="pl-pds">'</span></span></pre></div>
 
 <h3>
-<a id="creating-pages-manually" class="anchor" href="#creating-pages-manually" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating pages manually</h3>
+<a id="load-using-tm-library" class="anchor" href="#load-using-tm-library" aria-hidden="true"><span class="octicon octicon-link"></span></a>Load using TM library</h3>
+
+<p>The TM library is </p>
+
+<div class="highlight highlight-source-r"><pre>library(<span class="pl-smi">tm</span>) 
+<span class="pl-smi">docs</span> <span class="pl-k">&lt;-</span> Corpus(DataframeSource(<span class="pl-smi">df.texts.clean</span>))</pre></div>
 
 <h3>
-<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<a id="creating-a-corpus" class="anchor" href="#creating-a-corpus" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating a Corpus</h3>
+
+<p>We created a corpus </p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-v">df.texts</span> <span class="pl-k">=</span> as.data.frame(<span class="pl-smi">df</span>[,ncol(<span class="pl-smi">df</span>)])
+colnames(<span class="pl-smi">df.texts</span>) <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>FullText<span class="pl-pds">'</span></span></pre></div>
+
+<h3>
+<a id="cleaning-the-text" class="anchor" href="#cleaning-the-text" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cleaning the text</h3>
+
+<p>We then cleaned the text by removing...</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-en">removeNumPunct</span> <span class="pl-k">&lt;-</span> <span class="pl-k">function</span>(<span class="pl-smi">x</span>) gsub(<span class="pl-s"><span class="pl-pds">"</span>[^[:alpha:][:space:]]*<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>, <span class="pl-smi">x</span>)
+<span class="pl-smi">docs</span> <span class="pl-k">&lt;-</span> tm_map(<span class="pl-smi">docs</span>, content_transformer(<span class="pl-smi">removeNumPunct</span>))
+<span class="pl-smi">myStopwords</span> <span class="pl-k">&lt;-</span> c(stopwords(<span class="pl-v">kind</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>SMART<span class="pl-pds">'</span></span>), <span class="pl-s"><span class="pl-pds">"</span>available<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>via<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>twithndl<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>twithndlBankA<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>twithndlBankB<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>twithndlBankC<span class="pl-pds">"</span></span>,
+                 <span class="pl-s"><span class="pl-pds">"</span>twithndlBankD<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>twithndlBankE<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>INTERNET<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>Name<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>PHONE<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>ADDRESS<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>rettwit<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>Nameresp<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>ly<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>https<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>bit<span class="pl-pds">"</span></span>,
+                 <span class="pl-s"><span class="pl-pds">"</span>dlvr<span class="pl-pds">"</span></span>)
+<span class="pl-smi">docs</span> <span class="pl-k">&lt;-</span> tm_map(<span class="pl-smi">docs</span>, <span class="pl-smi">removeWords</span>, <span class="pl-smi">myStopwords</span>, <span class="pl-v">lazy</span> <span class="pl-k">=</span> <span class="pl-c1">T</span>)
+<span class="pl-smi">docs</span> <span class="pl-k">&lt;-</span> tm_map(<span class="pl-smi">docs</span>, <span class="pl-smi">stripWhitespace</span>)
+<span class="pl-smi">docsCopy</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">docs</span>
+<span class="pl-smi">docs</span> <span class="pl-k">&lt;-</span> tm_map(<span class="pl-smi">docs</span>, <span class="pl-smi">stemDocument</span>)
+<span class="pl-smi">docs</span> <span class="pl-k">&lt;-</span> Corpus(VectorSource(<span class="pl-smi">docs</span>))</pre></div>
+
+<h3>
+<a id="creating-corporatdm" class="anchor" href="#creating-corporatdm" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating corpora/tdm</h3>
+
+<p>We created individual corpora for each bank then individual term document matrices for each bank as well (repeat for all four banks)
+Corpus for Bank A:</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-v">bankA.idx</span> <span class="pl-k">=</span> which(sapply(<span class="pl-smi">df</span><span class="pl-k">$</span><span class="pl-smi">FullText</span>,<span class="pl-k">function</span>(<span class="pl-smi">x</span>) grepl(<span class="pl-s"><span class="pl-pds">"</span>BankA<span class="pl-pds">"</span></span>,<span class="pl-smi">x</span>)))
+<span class="pl-v">bankA.docs</span> <span class="pl-k">=</span> <span class="pl-smi">docs</span>[<span class="pl-smi">bankA.idx</span>]
+<span class="pl-smi">bankA.docs</span> <span class="pl-k">&lt;-</span> tm_map(<span class="pl-smi">bankA.docs</span>, <span class="pl-smi">removeWords</span>, c(<span class="pl-s"><span class="pl-pds">"</span>BankA<span class="pl-pds">"</span></span>), <span class="pl-v">lazy</span> <span class="pl-k">=</span> <span class="pl-c1">T</span>)</pre></div>
+
+<p>TDM for Bank A</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">tdmA</span> <span class="pl-k">&lt;-</span> TermDocumentMatrix(<span class="pl-smi">bankA.docs</span>, <span class="pl-v">control</span> <span class="pl-k">=</span> <span class="pl-k">list</span>(<span class="pl-v">wordLengths</span> <span class="pl-k">=</span> c(<span class="pl-c1">1</span>, <span class="pl-c1">Inf</span>)))</pre></div>
+
+<h3>
+<a id="spell-check" class="anchor" href="#spell-check" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spell Check</h3>
+
+<p>We manually took misspelled words out- looked through each individual data set for misspelled words- used frequent terms as a guide (repeat for all banks + entire data set)</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-v">terms</span> <span class="pl-k">=</span> dimnames(<span class="pl-smi">tdm</span>)<span class="pl-k">$</span><span class="pl-smi">Terms</span>
+<span class="pl-k">for</span> (<span class="pl-smi">i</span> <span class="pl-k">in</span> <span class="pl-c1">1</span><span class="pl-k">:</span>length(<span class="pl-smi">terms</span>)) {
+    <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>appli<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>application<span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>busi<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>business<span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>https<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>manag<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>manage<span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>servic<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>service<span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>advis<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>advise<span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>mortgag<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>mortgage<span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>reiter<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>reiterate<span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>ift<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>tt<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>financi<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>financial<span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>fb<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>compani<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>companies<span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>bank<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>charg<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>charge<span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>peopl<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>people<span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>rais<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>raise<span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>nameresp<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>dirmsg<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>fuck<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>f***<span class="pl-pds">'</span></span>
+    }<span class="pl-k">else</span> <span class="pl-k">if</span> (<span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">==</span> <span class="pl-s"><span class="pl-pds">'</span>happi<span class="pl-pds">'</span></span>) {
+        <span class="pl-smi">terms</span>[<span class="pl-smi">i</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>happiness<span class="pl-pds">'</span></span>
+    }
+}
+dimnames(<span class="pl-smi">tdm</span>)<span class="pl-k">$</span><span class="pl-v">Terms</span> <span class="pl-k">=</span> <span class="pl-smi">terms</span></pre></div>
+
+<h3>
+<a id="visuals-based-on-term-frequency" class="anchor" href="#visuals-based-on-term-frequency" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visuals based on term frequency</h3>
+
+<p>creates term frequency graph and a word cloud repeat for all banks 
+Term frequency:</p>
+
+<div class="highlight highlight-source-r"><pre>library(<span class="pl-smi">slam</span>)
+<span class="pl-smi">docs</span> <span class="pl-k">&lt;-</span> rollup(<span class="pl-smi">docs</span>, <span class="pl-c1">2</span>, <span class="pl-v">na.rm</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>, <span class="pl-v">FUN</span> <span class="pl-k">=</span> <span class="pl-smi">sum</span>)
+<span class="pl-smi">freq.terms</span> <span class="pl-k">&lt;-</span> findFreqTerms(<span class="pl-smi">tdm</span>, <span class="pl-v">lowfreq</span> <span class="pl-k">=</span> <span class="pl-c1">1000</span>))      
+<span class="pl-smi">term.freq</span> <span class="pl-k">&lt;-</span> rowSums(as.matrix(<span class="pl-smi">tdm</span>))
+<span class="pl-smi">term.freq</span> <span class="pl-k">&lt;-</span> subset(<span class="pl-smi">term.freq</span>, <span class="pl-smi">term.freq</span> <span class="pl-k">&gt;</span><span class="pl-k">=</span> <span class="pl-c1">1000</span>)
+<span class="pl-smi">tdm</span> <span class="pl-k">&lt;-</span> rollup(<span class="pl-smi">tdm</span>, <span class="pl-c1">2</span>, <span class="pl-v">na.rm</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>, <span class="pl-v">FUN</span> <span class="pl-k">=</span> <span class="pl-smi">sum</span>)
+<span class="pl-smi">term.freq</span> <span class="pl-k">&lt;-</span> rowSums(as.matrix(<span class="pl-smi">tdm</span>))
+<span class="pl-smi">term.freq</span> <span class="pl-k">&lt;-</span> subset(<span class="pl-smi">term.freq</span>, <span class="pl-smi">term.freq</span> <span class="pl-k">&gt;</span><span class="pl-k">=</span> <span class="pl-c1">1000</span>)
+<span class="pl-smi">df.all</span> <span class="pl-k">&lt;-</span> <span class="pl-k">data.frame</span>(<span class="pl-v">term</span> <span class="pl-k">=</span> names(<span class="pl-smi">term.freq</span>), <span class="pl-v">freq</span> <span class="pl-k">=</span> <span class="pl-smi">term.freq</span>)
+library(<span class="pl-smi">ggplot2</span>)
+ggplot(<span class="pl-smi">df.all</span>, aes(<span class="pl-v">x</span><span class="pl-k">=</span><span class="pl-smi">term</span>, <span class="pl-v">y</span><span class="pl-k">=</span><span class="pl-smi">freq</span>)) <span class="pl-k">+</span> geom_bar(<span class="pl-v">stat</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>identity<span class="pl-pds">"</span></span>) <span class="pl-k">+</span> xlab(<span class="pl-s"><span class="pl-pds">"</span>Terms<span class="pl-pds">"</span></span>) <span class="pl-k">+</span> ylab(<span class="pl-s"><span class="pl-pds">"</span>Count<span class="pl-pds">"</span></span>) <span class="pl-k">+</span> coord_flip()</pre></div>
+
+<p>Word Cloud:</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">m</span> <span class="pl-k">&lt;-</span> as.matrix(<span class="pl-smi">tdm</span>)
+<span class="pl-smi">word.freq</span> <span class="pl-k">&lt;-</span> sort(rowSums(<span class="pl-smi">m</span>), <span class="pl-v">decreasing</span> <span class="pl-k">=</span> <span class="pl-c1">T</span>)
+<span class="pl-smi">pal</span> <span class="pl-k">&lt;-</span> brewer.pal(<span class="pl-c1">9</span>, <span class="pl-s"><span class="pl-pds">"</span>BuGn<span class="pl-pds">"</span></span>)
+<span class="pl-smi">pal</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">pal</span>[<span class="pl-k">-</span>(<span class="pl-c1">1</span><span class="pl-k">:</span><span class="pl-c1">4</span>)]
+library(<span class="pl-smi">wordcloud</span>)
+wordcloud(<span class="pl-v">words</span> <span class="pl-k">=</span> names(<span class="pl-smi">word.freq</span>), <span class="pl-v">freq</span> <span class="pl-k">=</span> <span class="pl-smi">word.freq</span>, <span class="pl-v">min.freq</span><span class="pl-k">=</span><span class="pl-c1">2500</span>, <span class="pl-v">random.order</span><span class="pl-k">=</span><span class="pl-c1">F</span>, <span class="pl-v">random.color</span><span class="pl-k">=</span><span class="pl-c1">F</span>, <span class="pl-v">colors</span> <span class="pl-k">=</span> <span class="pl-smi">pal</span>)</pre></div>
+
+<h3>
+<a id="sentiment-analysis" class="anchor" href="#sentiment-analysis" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sentiment analysis</h3>
+
+<p>pos neg connotation for each tweet</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">pos</span> <span class="pl-k">&lt;-</span> scan(<span class="pl-s"><span class="pl-pds">'</span>positive-words.txt<span class="pl-pds">'</span></span>,<span class="pl-v">what</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>character<span class="pl-pds">'</span></span>,<span class="pl-v">comment.char</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>;<span class="pl-pds">'</span></span>)
+<span class="pl-smi">neg</span> <span class="pl-k">&lt;-</span> scan(<span class="pl-s"><span class="pl-pds">'</span>negative-words.txt<span class="pl-pds">'</span></span>,<span class="pl-v">what</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>character<span class="pl-pds">'</span></span>,<span class="pl-v">comment.char</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>;<span class="pl-pds">'</span></span>)
+
+<span class="pl-v">score.sentiment</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(<span class="pl-smi">sentences</span>, <span class="pl-smi">pos.words</span>, <span class="pl-smi">neg.words</span>, <span class="pl-v">.progress</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>none<span class="pl-pds">'</span></span>)
+{
+  require(<span class="pl-smi">plyr</span>)
+  require(<span class="pl-smi">stringr</span>)
+
+  <span class="pl-v">scores</span> <span class="pl-k">=</span> laply(<span class="pl-smi">sentences</span>, <span class="pl-k">function</span>(<span class="pl-smi">sentence</span>, <span class="pl-smi">pos.words</span>, <span class="pl-smi">neg.words</span>) {
+
+    <span class="pl-c"># split into words. str_split is in the stringr package</span>
+    <span class="pl-v">word.list</span> <span class="pl-k">=</span> str_split(<span class="pl-smi">sentence</span>, <span class="pl-s"><span class="pl-pds">'</span><span class="pl-cce">\\</span>s+<span class="pl-pds">'</span></span>)
+    <span class="pl-c"># sometimes a list() is one level of hierarchy too much</span>
+    <span class="pl-v">words</span> <span class="pl-k">=</span> unlist(<span class="pl-smi">word.list</span>)
+
+    <span class="pl-c"># compare our words to the dictionaries of positive &amp; negative terms</span>
+    <span class="pl-v">pos.matches</span> <span class="pl-k">=</span> match(<span class="pl-smi">words</span>, <span class="pl-smi">pos.words</span>)
+    <span class="pl-v">neg.matches</span> <span class="pl-k">=</span> match(<span class="pl-smi">words</span>, <span class="pl-smi">neg.words</span>)
+
+    <span class="pl-c"># match() returns the position of the matched term or NA</span>
+    <span class="pl-c"># we just want a TRUE/FALSE:</span>
+    <span class="pl-v">pos.matches</span> <span class="pl-k">=</span> <span class="pl-k">!</span>is.na(<span class="pl-smi">pos.matches</span>)
+    <span class="pl-v">neg.matches</span> <span class="pl-k">=</span> <span class="pl-k">!</span>is.na(<span class="pl-smi">neg.matches</span>)
+
+    <span class="pl-c"># and conveniently enough, TRUE/FALSE will be treated as 1/0 by sum():</span>
+    <span class="pl-v">score</span> <span class="pl-k">=</span> sum(<span class="pl-smi">pos.matches</span>) <span class="pl-k">-</span> sum(<span class="pl-smi">neg.matches</span>)
+
+    <span class="pl-k">return</span>(<span class="pl-smi">score</span>)
+  }, <span class="pl-smi">pos.words</span>, <span class="pl-smi">neg.words</span>, <span class="pl-v">.progress</span><span class="pl-k">=</span>.<span class="pl-smi">progress</span> )
+
+  <span class="pl-v">scores.df</span> <span class="pl-k">=</span> <span class="pl-k">data.frame</span>(<span class="pl-v">score</span><span class="pl-k">=</span><span class="pl-smi">scores</span>, <span class="pl-v">text</span><span class="pl-k">=</span><span class="pl-smi">sentences</span>)
+  <span class="pl-k">return</span>(<span class="pl-smi">scores.df</span>)
+}</pre></div>
+
+<h3>
+<a id="visuals-based-on-sentiment-analysis" class="anchor" href="#visuals-based-on-sentiment-analysis" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visuals based on sentiment analysis</h3>
+
+<p>bar v box</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-c"># global score</span>
+<span class="pl-v">global_score</span> <span class="pl-k">=</span> round( <span class="pl-c1">100</span> <span class="pl-k">*</span> <span class="pl-smi">numpos</span> <span class="pl-k">/</span> (<span class="pl-smi">numpos</span> <span class="pl-k">+</span> <span class="pl-smi">numneg</span>) )
+<span class="pl-smi">scores</span><span class="pl-k">$</span><span class="pl-v">mediatype</span> <span class="pl-k">=</span> <span class="pl-smi">df.sentiment</span><span class="pl-k">$</span><span class="pl-smi">MediaType</span>
+<span class="pl-c"># colors</span>
+<span class="pl-v">cols</span> <span class="pl-k">=</span> c(<span class="pl-s"><span class="pl-pds">"</span>#7CAE00<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>#00BFC4<span class="pl-pds">"</span></span>)
+names(<span class="pl-smi">cols</span>) <span class="pl-k">=</span> c(<span class="pl-s"><span class="pl-pds">"</span>twitter<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>facebook<span class="pl-pds">"</span></span>)
+<span class="pl-c"># boxplot</span>
+library(<span class="pl-smi">ggplot2</span>)
+ggplot(<span class="pl-smi">scores</span>, aes(<span class="pl-v">x</span><span class="pl-k">=</span><span class="pl-smi">mediatype</span>, <span class="pl-v">y</span><span class="pl-k">=</span><span class="pl-smi">score</span>, <span class="pl-v">group</span><span class="pl-k">=</span><span class="pl-smi">mediatype</span>)) <span class="pl-k">+</span>
+  geom_boxplot(aes(<span class="pl-v">fill</span><span class="pl-k">=</span><span class="pl-smi">mediatype</span>)) <span class="pl-k">+</span>
+  scale_fill_manual(<span class="pl-v">values</span><span class="pl-k">=</span><span class="pl-smi">cols</span>) <span class="pl-k">+</span>
+  geom_jitter(<span class="pl-v">colour</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>gray40<span class="pl-pds">"</span></span>,<span class="pl-v">position</span><span class="pl-k">=</span>position_jitter(<span class="pl-v">width</span><span class="pl-k">=</span><span class="pl-c1">0.2</span>), <span class="pl-v">alpha</span><span class="pl-k">=</span><span class="pl-c1">0.3</span>) <span class="pl-k">+</span>
+  labs(<span class="pl-v">title</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>Media Type's Sentiment Scores<span class="pl-pds">"</span></span>) <span class="pl-k">+</span> 
+  xlab(<span class="pl-s"><span class="pl-pds">'</span>Media Type<span class="pl-pds">'</span></span>) <span class="pl-k">+</span> ylab(<span class="pl-s"><span class="pl-pds">'</span>Sentiment Score<span class="pl-pds">'</span></span>)</pre></div>
+
+<p>barplot</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-v">meanscore</span> <span class="pl-k">=</span> tapply(<span class="pl-smi">scores</span><span class="pl-k">$</span><span class="pl-smi">score</span>, <span class="pl-smi">scores</span><span class="pl-k">$</span><span class="pl-smi">mediatype</span>, <span class="pl-smi">mean</span>)
+<span class="pl-v">df.plot</span> <span class="pl-k">=</span> <span class="pl-k">data.frame</span>(<span class="pl-v">mediatype</span><span class="pl-k">=</span>names(<span class="pl-smi">meanscore</span>), <span class="pl-v">meanscore</span><span class="pl-k">=</span><span class="pl-smi">meanscore</span>)
+<span class="pl-smi">df.plot</span><span class="pl-k">$</span><span class="pl-smi">mediatypes</span> <span class="pl-k">&lt;-</span> reorder(<span class="pl-smi">df.plot</span><span class="pl-k">$</span><span class="pl-smi">mediatype</span>, <span class="pl-smi">df.plot</span><span class="pl-k">$</span><span class="pl-smi">meanscore</span>)
+ggplot(<span class="pl-smi">df.plot</span>, aes(<span class="pl-v">x</span> <span class="pl-k">=</span> <span class="pl-k">factor</span>(<span class="pl-smi">mediatypes</span>), <span class="pl-v">y</span> <span class="pl-k">=</span> <span class="pl-smi">meanscore</span>, <span class="pl-v">fill</span><span class="pl-k">=</span><span class="pl-smi">mediatypes</span>)) <span class="pl-k">+</span>
+  geom_bar(<span class="pl-v">stat</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>identity<span class="pl-pds">"</span></span>) <span class="pl-k">+</span>
+  scale_fill_manual(<span class="pl-v">values</span><span class="pl-k">=</span><span class="pl-smi">cols</span>[order(<span class="pl-smi">df.plot</span><span class="pl-k">$</span><span class="pl-smi">meanscore</span>)]) <span class="pl-k">+</span>
+  labs(<span class="pl-v">title</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>Average Sentiment Score<span class="pl-pds">"</span></span>) <span class="pl-k">+</span> 
+  xlab(<span class="pl-s"><span class="pl-pds">'</span>Media Type<span class="pl-pds">'</span></span>) <span class="pl-k">+</span> ylab(<span class="pl-s"><span class="pl-pds">'</span>Average Score<span class="pl-pds">'</span></span>)</pre></div>
+
+<h2>
+<a id="visuals-for-individual-banks" class="anchor" href="#visuals-for-individual-banks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visuals for individual banks</h2>
+
+<h3>
+<a id="bank-a" class="anchor" href="#bank-a" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bank A</h3>
+
+<h3>
+<a id="bank-b" class="anchor" href="#bank-b" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bank B</h3>
+
+<h3>
+<a id="bank-c" class="anchor" href="#bank-c" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bank C</h3>
+
+<h3>
+<a id="bank-d" class="anchor" href="#bank-d" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bank D</h3>
+
+<h2>
+<a id="conclusions" class="anchor" href="#conclusions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusions</h2>
+
+<h2>
+<a id="special-thanks" class="anchor" href="#special-thanks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Special Thanks</h2>
+
+<p>I'd like to thank Wells Fargo for presenting this opportunity. Specifically, I'd like to thank Wells Fargo's Office of Innovation, Enterprise of Social Media, and Chief Data Office - Enterprise Data &amp; Analytics teams for sponsoring this competition. I would also like to thank my colleagues, Katie Duchinski and Emily Berich, for their dedication and hard work on this project.</p>
+
+<h2>
+<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h2>
 
 <p><a href="https://github.com/kduchinski" class="user-mention">@kduchinski</a>
 <a href="https://github.com/emilyberich" class="user-mention">@emilyberich</a></p>
+      </section>
 
-<h3>
-<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out our <a href="https://help.github.com/pages">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.</p>
-
-<h1>
-<a id="comment-to-insert-code-three-back-ticks-in-a-row-example" class="anchor" href="#comment-to-insert-code-three-back-ticks-in-a-row-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>COMMENT to insert code three back ticks in a row EXAMPLE:</h1>
-
-<div class="highlight highlight-source-r"><pre><span class="pl-smi">code</span> <span class="pl-smi">code</span> <span class="pl-smi">code</span></pre></div>
-
-<h1>
-<a id="comment-to-create-a-table-of-contents-on-the-right-side-use-one-or-two--instead-of-three" class="anchor" href="#comment-to-create-a-table-of-contents-on-the-right-side-use-one-or-two--instead-of-three" aria-hidden="true"><span class="octicon octicon-link"></span></a>COMMENT to create a table of contents on the right side use one or two # instead of three</h1>
-
-<pre><code>three hash are hidden on menu one or two are shown 
-</code></pre>
-
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/nashkenziem/wells-fargo-analytics">Wells Fargo Analytics Competition</a> is maintained by <a href="https://github.com/nashkenziem">nashkenziem</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-    </section>
-
-  
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
   </body>
 </html>
