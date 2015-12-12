@@ -49,7 +49,7 @@
 <p><strong>All code in R</strong></p>
 
 <h3>
-<a id="creating-a-data-frame" class="anchor" href="#creating-a-data-frame" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating a data frame</h3>
+<a id="creating-a-data-frame" class="anchor" href="#creating-a-data-frame" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating a Data Frame</h3>
 
 <p>We created a data frame to create easily accessible data tables. These data tables make it easy to select an entire column or row of data.</p>
 
@@ -70,7 +70,7 @@ spellDoc(<span class="pl-smi">doc</span>, <span class="pl-v">wordHandler</span> 
 colnames(<span class="pl-smi">df.texts.clean</span>) <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>FullText<span class="pl-pds">'</span></span></pre></div>
 
 <h3>
-<a id="load-using-tm-library" class="anchor" href="#load-using-tm-library" aria-hidden="true"><span class="octicon octicon-link"></span></a>Load using TM library</h3>
+<a id="load-using-tm-library" class="anchor" href="#load-using-tm-library" aria-hidden="true"><span class="octicon octicon-link"></span></a>Load Using TM Library</h3>
 
 <p>The TM library is a text mining package downloaded from CRAN. This package contains various functions used to analyze text data.</p>
 
@@ -86,7 +86,7 @@ colnames(<span class="pl-smi">df.texts.clean</span>) <span class="pl-k">=</span>
 colnames(<span class="pl-smi">df.texts</span>) <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>FullText<span class="pl-pds">'</span></span></pre></div>
 
 <h3>
-<a id="cleaning-the-text" class="anchor" href="#cleaning-the-text" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cleaning the text</h3>
+<a id="cleaning-the-text" class="anchor" href="#cleaning-the-text" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cleaning the Text</h3>
 
 <p>We then cleaned the text by removing white spaces, and stop words. Stop words are words like "the," and "but" that have no value analytically. We also removed words that Wells Fargo added to protect the anonymity of consumers such as "Name."</p>
 
@@ -102,7 +102,7 @@ colnames(<span class="pl-smi">df.texts</span>) <span class="pl-k">=</span> <span
 <span class="pl-smi">docs</span> <span class="pl-k">&lt;-</span> Corpus(VectorSource(<span class="pl-smi">docs</span>))</pre></div>
 
 <h3>
-<a id="creating-corpora-and-term-document-matricies" class="anchor" href="#creating-corpora-and-term-document-matricies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating corpora and term document matricies</h3>
+<a id="creating-corpora-and-term-document-matricies" class="anchor" href="#creating-corpora-and-term-document-matricies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating Corpora and Term Document Matricies</h3>
 
 <p>We created individual corpora for each bank then individual term document matrices for each bank as well.
 Corpus for Bank A:</p>
@@ -169,10 +169,10 @@ Corpus for Bank A:</p>
 dimnames(<span class="pl-smi">tdm</span>)<span class="pl-k">$</span><span class="pl-v">Terms</span> <span class="pl-k">=</span> <span class="pl-smi">terms</span></pre></div>
 
 <h3>
-<a id="visuals-based-on-term-frequency" class="anchor" href="#visuals-based-on-term-frequency" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visuals based on term frequency</h3>
+<a id="visuals-based-on-term-frequency" class="anchor" href="#visuals-based-on-term-frequency" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visuals Based on Term Frequency</h3>
 
 <p>Using the most frequent terms for the data set we created both a term frequency graph and a word cloud. We also did this for each bank.
-Term frequency:</p>
+Term Frequency Graph:</p>
 
 <div class="highlight highlight-source-r"><pre>library(<span class="pl-smi">slam</span>)
 <span class="pl-smi">docs</span> <span class="pl-k">&lt;-</span> rollup(<span class="pl-smi">docs</span>, <span class="pl-c1">2</span>, <span class="pl-v">na.rm</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>, <span class="pl-v">FUN</span> <span class="pl-k">=</span> <span class="pl-smi">sum</span>)
@@ -200,7 +200,7 @@ wordcloud(<span class="pl-v">words</span> <span class="pl-k">=</span> names(<spa
 <p><a href="http://imgur.com/ULops3z"><img src="http://i.imgur.com/ULops3z.png" title="source: imgur.com"></a> </p>
 
 <h3>
-<a id="sentiment-analysis" class="anchor" href="#sentiment-analysis" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sentiment analysis</h3>
+<a id="sentiment-analysis" class="anchor" href="#sentiment-analysis" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sentiment Analysis</h3>
 
 <p>pos neg connotation for each tweet</p>
 
@@ -239,7 +239,7 @@ wordcloud(<span class="pl-v">words</span> <span class="pl-k">=</span> names(<spa
 }</pre></div>
 
 <h3>
-<a id="visuals-based-on-sentiment-analysis" class="anchor" href="#visuals-based-on-sentiment-analysis" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visuals based on sentiment analysis</h3>
+<a id="visuals-based-on-sentiment-analysis" class="anchor" href="#visuals-based-on-sentiment-analysis" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visuals Based on Sentiment Analysis</h3>
 
 <p>We chose to use a bar plot and a box plot to represent sentiment scores for our data set. The box plot plots a point for the sentiment of each tweet or post separated by platform. The bar plot give the average score for each tweet or post. This is also separated by each platform. 
 Boxplot:</p>
@@ -299,6 +299,8 @@ ggplot(<span class="pl-smi">df.plot</span>, aes(<span class="pl-v">x</span> <spa
 
 <h1>
 <a id="conclusions" class="anchor" href="#conclusions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusions</h1>
+
+<p>It is important to note that not every tweet or post speaks directly about the bank. You must remember that there are other factors. The consumer may have had a bad experience indirectly involving the bank and used that bank as a scapegoat for their anger. With that in mind, based on our data, </p>
 
 <h1>
 <a id="special-thanks" class="anchor" href="#special-thanks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Special Thanks</h1>
